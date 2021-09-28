@@ -1,5 +1,15 @@
 @import './styles/reset.scss';
+@import './styles/variables.scss';
 
 body {
   font-family: 'Roboto', sans-serif;
+  min-width: 320px;
+  background-color: $mainColorLight;
+  color: $mainColorDark;
+}
+
+.container {
+  max-width: 1200px + 30px;
+  padding: 0 15px;
+  margin: 0 auto;
 }
