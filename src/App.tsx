@@ -10,11 +10,16 @@ function App() {
   return (
     <Router>
       <Header />
-      <Switch>
-        <Route path='/authtorization' component={Authorization} />
-        <Route path='/registration' component={Registration} />
-        <Route path='/' component={AllBlogs} />
-      </Switch>
+      <main className="main">
+        <div className="container">
+          <Switch>
+            <Route path='/authorization' component={Authorization} />
+            <Route path='/registration' component={Registration} />
+            <Route path='/' component={AllBlogs} />
+          </Switch>
+        </div> 
+      </main>
+      
     </Router>
   );
 }
