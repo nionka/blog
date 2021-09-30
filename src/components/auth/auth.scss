@@ -6,3 +6,11 @@
   margin: auto;
   min-width: 300px;
 }
+
+.authorization, .registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+}

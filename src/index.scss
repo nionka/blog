@@ -5,12 +5,13 @@
 body {
   font-family: 'Roboto', sans-serif;
   min-width: 320px;
-  background-color: $mainColorLight;
+  background-color: $bgColor;
   color: $mainColorDark;
 }
 
 .container {
   max-width: 1200px + 30px;
+  height: 100%;
   padding: 0 15px;
   margin: 0 auto;
 }

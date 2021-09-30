@@ -4,6 +4,7 @@ import './app.scss';
 import AllBlogs from './components/allBlogs/AllBlogs';
 import Authorization from './components/auth/Authorization';
 import Registration from './components/auth/Registration';
+import Blog from './components/Blog/Blog';
 import Header from './components/header/Header';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Switch>
             <Route path='/authorization' component={Authorization} />
             <Route path='/registration' component={Registration} />
+            <Route path='/blog/:id' component={Blog}/>
             <Route path='/' component={AllBlogs} />
           </Switch>
         </div> 
