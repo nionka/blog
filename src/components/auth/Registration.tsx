@@ -20,26 +20,20 @@ function Registration(): JSX.Element {
   return (
     <section className="registration" >
       <form className="form" onSubmit={handleSubmit}>
-        <label>
-          <span>Логин</span>
-          <Input
-            customCssClass='mb'
-            type='text'
-            placeholder="Логин"
-            name='Login'
-            changeHandler={(e) => handleChange(e)}
-          />
-        </label>
-        <label>
-          <span>Пароль</span>
-          <Input
-            customCssClass='mb'
-            type='text'
-            placeholder="Пароль"
-            name='password'
-            changeHandler={(e) => handleChange(e)}
-          />
-        </label>
+        <Input
+          customCssClass='mb'
+          type='text'
+          placeholder="Логин"
+          name='Login'
+          changeHandler={(e) => handleChange(e)}
+        />
+        <Input
+          customCssClass='mb'
+          type='text'
+          placeholder="Пароль"
+          name='password'
+          changeHandler={(e) => handleChange(e)}
+        />
         <Button
           customCssClass='mt'
           color={ButtonColor.PRIMARY}

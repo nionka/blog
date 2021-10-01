@@ -1,16 +1,18 @@
 import React from 'react';
-import './allBlogs.scss';
+import './mainPage.scss';
 import { allBlog } from '../../api/blogs';
 import BlogCard from '../BlogCard/BlogCard';
 
-function AllBlogs(): JSX.Element {
+function MainPage(): JSX.Element {
   return (
-    <section className="allBlogs">
+    <section className="mainPage">
+      <div className="container">
         <div className="content">
           {allBlog.map(blog => <BlogCard key={blog.id} {...blog} />)}
         </div>
+      </div>
     </section> 
   )
 }
 
-export default AllBlogs;
+export default MainPage;

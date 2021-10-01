@@ -1,9 +1,8 @@
 @import './styles/variables.scss';
 
-.main {
-  height: calc(100vh - 60px);
-}
-
-h1 {
-  color: $primary;
-}
+  .main {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

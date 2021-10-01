@@ -2,11 +2,19 @@
 @import './styles/variables.scss';
 @import './styles/style.scss';
 
+
+#root {
+  min-height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   min-width: 320px;
   background-color: $bgColor;
-  color: $mainColorDark;
+  color: $fontColorDark;
 }
 
 .container {

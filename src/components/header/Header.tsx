@@ -7,10 +7,11 @@ function Header(): JSX.Element {
     <header className="header">
       <div className="container">
         <div className="logo">
-          <Link to='/'>BLOG</Link>
+          <Link to='/'>Wide World</Link>
+          <div className="logo__slogan">Пиши о том, что нравится</div>
         </div>
         <div className="control">
-          <Link to='/authorization' className="link">Авторизация</Link>
+          <Link to='/authorization' className="link">Вход</Link>
           <span> / </span>
           <Link to='/registration' className="link">Регистрация</Link>
         </div>
