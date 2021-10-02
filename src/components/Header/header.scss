@@ -5,20 +5,7 @@
   color: $mainColorLight;
   box-shadow: 0 5px 5px -3px $primaryColor;
   padding: 10px 0;
-
-  .logo {
-    font-size: 32px;
-    font-weight: 700;
-    font-style: italic;
-    padding: 10px;
-    text-align: center;
-
-    &__slogan {
-      font-size: 16px;
-      font-weight: 300;
-      margin-top: 7px;
-    }
-  }
+  
   
   .container {
     display: flex;

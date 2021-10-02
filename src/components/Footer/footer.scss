@@ -2,5 +2,16 @@
 
 .footer {
   background-color: $primaryColor;
-  height: 80px;
+  color: #6c757d;
+  padding: 20px 0;
+
+  .container {
+    display: flex;
+  }
+
+  &__copy {
+    font-size: 12px;
+    text-align: center;
+    padding: 10px 0; 
+  }
 }
