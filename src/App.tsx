@@ -5,8 +5,8 @@ import MainPage from './components/MainPage/MainPage';
 import Authorization from './components/auth/Authorization';
 import Registration from './components/auth/Registration';
 import Blog from './components/Blog/Blog';
-import Header from './components/header/Header';
-import Footer from './Footer/Footer';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (

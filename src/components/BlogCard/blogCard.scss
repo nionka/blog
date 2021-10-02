@@ -1,35 +1,58 @@
 @import '../../styles/variables.scss';
 
 .card {
-  width: calc(50% - 15px);
-  min-height: 250px;
-  padding: 10px;
-  margin-bottom: 20px;
-
-  border-radius: 5px;
-  background-color: white;
-  box-shadow: 2px 2px 10px rgba(128, 128, 128, 0.5);
+  padding: 30px 10px;
+  border-bottom: 1px solid $borderColor;
 
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 
-  &__title {
-    text-align: center;
-    padding: 10px 0;
-    font-size: 20px;
-    font-weight: 700;
-    color: $accentColor;
+  &__img {
+    width: 40%;
+    height: 40%;
+    overflow: hidden;
 
-    &:hover {
-      color: $primaryColor;
+    margin-right: 20px;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      object-fit: cover; 
     }
   }
 
-  &__footer {
-    padding: 10px 0;
+  &__content {
+    flex-grow: 1;
+  }
 
+  &__title {
+    display: block;
+    padding: 10px 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: $fontColorDark;
+
+    &:hover {
+      color: $fontColorLight;
+    }
+  }
+
+  &__header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
   }
+
+  &__date {
+    font-size: 11px;
+    color: $fontColorLight;
+  }
+
+  &__author {
+    font-weight: 700;
+  }
+
+  &__tags {
+    color: $accentColorSecondary;
+  } 
 }
