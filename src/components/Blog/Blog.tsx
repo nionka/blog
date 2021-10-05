@@ -18,7 +18,21 @@ function Blog({ match }: RouteComponentProps<TParams>): JSX.Element {
 
   return (
     <section className="blog">
-      <h2 className="blog__title">{blog.title}</h2>
+      <div className="container">
+        <h2 className="blog__title">{blog.title}</h2>
+        <header className="blog__header">
+          <div className="blog__date">{blog.date}</div>
+          <div className="blog__tags">{blog.tags}</div>
+        </header>
+        <div className="blog__author">Автор: <span>{blog.author}</span></div>
+
+        <div className="blog__img">
+          <img src={blog.url} alt={blog.title} />
+        </div>
+        <div className="blog__content">
+          {blog.content}
+        </div>
+      </div> 
     </section> 
   )
 }

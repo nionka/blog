@@ -1,8 +1,57 @@
+@import '../../styles/variables.scss';
+
 .blog {
-  padding-top: 20px;
+  padding: 50px 0;
+  align-self: flex-start;
+  width: 70%;
 
   &__title {
-    text-align: center;
-    font-size: 30px;
+    //text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    color: $fontColorDark;
+  }
+
+  &__header {
+    display: flex;
+    margin: 15px 0;
+  }
+
+  &__date {
+    font-size: 13px;
+    color: $fontColorLight;
+    margin-right: 20px;
+  }
+
+  &__tags {
+    color: $accentColorSecondary;
+    font-size: 15px;
+  }
+
+  &__author {
+
+    margin-bottom: 20px;
+
+    span {
+      font-size: 16px;
+      color: $fontColorDark;
+      font-weight: 700;
+    } 
+  }
+
+  &__img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    font-size: 17px;
+    color: $fontColorDark;
   }
 }

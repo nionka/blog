@@ -8,13 +8,15 @@
 
   &__img {
     width: 40%;
-    height: 40%;
+    height: auto;
+    max-height: 250px;
     overflow: hidden;
 
     margin-right: 20px;
     flex-shrink: 0;
 
     img {
+      display: block;
       width: 100%;
       object-fit: cover; 
     }
