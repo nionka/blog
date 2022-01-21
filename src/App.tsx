@@ -7,6 +7,7 @@ import Registration from './components/auth/Registration';
 import ArticlePage from './components/pages/ArticlePage/ArticlePage';
 import Header from './components/common/Header/Header';
 import Footer from './components/common/Footer/Footer';
+import LogOut from './components/common/LogOut/LogOut';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Switch>
           <Route path='/authorization' component={Authorization} />
           <Route path='/registration' component={Registration} />
+          <Route path='/logout' component={LogOut} />
           <Route path='/blog/:id' component={ArticlePage}/>
           <Route path='/' component={MainPage} />
         </Switch> 
