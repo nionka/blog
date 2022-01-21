@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './app.scss';
-import MainPage from './components/MainPage/MainPage';
+import MainPage from './components/pages/MainPage/MainPage';
 import Authorization from './components/auth/Authorization';
 import Registration from './components/auth/Registration';
-import Blog from './components/Blog/Blog';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import ArticlePage from './components/pages/ArticlePage/ArticlePage';
+import Header from './components/common/Header/Header';
+import Footer from './components/common/Footer/Footer';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Switch>
           <Route path='/authorization' component={Authorization} />
           <Route path='/registration' component={Registration} />
-          <Route path='/blog/:id' component={Blog}/>
+          <Route path='/blog/:id' component={ArticlePage}/>
           <Route path='/' component={MainPage} />
         </Switch> 
       </main>
