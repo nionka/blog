@@ -1,0 +1,16 @@
+@import '../../../styles/variables.scss';
+
+.logo {
+  color: $mainColorLight;
+  font-size: 32px;
+  font-weight: 700;
+  font-style: italic;
+  padding: 10px;
+  text-align: center;
+
+  &__slogan {
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 7px;
+  }
+}

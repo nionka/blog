@@ -1,0 +1,17 @@
+@import '../../../styles/variables.scss';
+
+.footer {
+  background-color: $primaryColor;
+  color: #6c757d;
+  padding-top: 20px;
+
+  .container {
+    display: flex;
+  }
+
+  &__copy {
+    font-size: 12px;
+    text-align: center;
+    padding: 10px 0; 
+  }
+}

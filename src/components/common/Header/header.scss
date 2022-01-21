@@ -1,0 +1,26 @@
+@import '../../../styles/variables.scss';
+
+.header {
+  background-color: $primaryColor;
+  color: $mainColorLight;
+  box-shadow: 0 5px 5px -3px $primaryColor;
+  padding: 10px 0;
+  
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 100%;
+  }
+
+  .link {
+    font-weight: 300;
+    transition: color 0.3s;
+
+    &:hover {
+      color: $accentColor;
+    }
+  }
+}
