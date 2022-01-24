@@ -1,0 +1,4 @@
+{
+    "port": 8080,
+    "mongoUri": "mongodb+srv://olga:runova123@cluster0.jnepn.mongodb.net/app?retryWrites=true&w=majority"
+}
