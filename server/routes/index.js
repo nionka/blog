@@ -3,5 +3,6 @@ const router = express.Router({ mergeParams: true });
 
 router.use('/auth', require('./auth.router'));
 router.use('/articles', require('./article.router'));
+router.use('/tags', require('./tags.router'));
 
 module.exports = router;

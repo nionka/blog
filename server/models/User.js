@@ -6,7 +6,7 @@ const schema = new Schema({
     password: { type: String },
     image: { type: String },
     gender: { type: String, enum: ['male', 'female', 'other'] },
-    articles: { type: Schema.Types.ObjectId, ref: 'Article' }
+    articles: [{ type: Schema.Types.ObjectId, ref: 'Article' }]
 }, {
     timestamps: true
 });

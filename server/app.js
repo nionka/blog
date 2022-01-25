@@ -3,6 +3,7 @@ const config = require('config');
 const chalk = require('chalk');
 const mongoose = require('mongoose');
 const routes = require('./routes');
+const initDatabase = require('./startUp/initDatabase');
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,10 @@ const PORT = config.get('port') ?? 8080;
 
 async function start() {
     try {
+        mongoose.connection.once('open', () => {
+            console.log('ololo');
+            initDatabase();
+        })
         await mongoose.connect(config.get('mongoUri'))
         app.listen(PORT, () => {
             console.log(chalk.green(`Server has been started on port: ${PORT}...`));
