@@ -1,4 +1,6 @@
 {
     "port": 8080,
-    "mongoUri": "mongodb+srv://olga:runova123@cluster0.jnepn.mongodb.net/app?retryWrites=true&w=majority"
+    "mongoUri": "mongodb+srv://olga:runova123@cluster0.jnepn.mongodb.net/app?retryWrites=true&w=majority",
+    "accessSecretKey": "access secret key from backend",
+    "refreshSecretKey": "refresh secret key from backend"
 }
