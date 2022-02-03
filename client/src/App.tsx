@@ -10,22 +10,25 @@ import ArticlePage from './components/pages/ArticlePage/ArticlePage';
 import Header from './components/common/Header/Header';
 import Footer from './components/common/Footer/Footer';
 import LogOut from './components/common/LogOut/LogOut';
+import AppLoader from './components/hoc/AppLoader';
 
 function App() {
   return (
     <>
-      <Header />
-      <main className="main">
-        <Switch>
-          <Route path='/authorization' component={Authorization} />
-          <Route path='/registration' component={Registration} />
-          <Route path='/logout' component={LogOut} />
-          <Route path='/blog/:id' component={ArticlePage}/>
-          <Route path='/' exact component={MainPage} />
-        </Switch>
-        <ToastContainer />
-      </main>
-      <Footer />
+      <AppLoader>
+        <Header />
+        <main className="main">
+          <Switch>
+            <Route path='/authorization' component={Authorization} />
+            <Route path='/registration' component={Registration} />
+            <Route path='/logout' component={LogOut} />
+            <Route path='/blog/:id' component={ArticlePage}/>
+            <Route path='/' exact component={MainPage} />
+          </Switch>
+          <ToastContainer />
+        </main>
+        <Footer />
+      </AppLoader>
     </>
   );
 }

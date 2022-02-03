@@ -1,8 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getTags } from '../../../store/tags';
 import './tags.scss';
 
 function Tags(): JSX.Element {
+  const tags = useSelector(getTags());
   return (
     <section className="tags">
       <h2 className="tags__title">Категории</h2>
@@ -10,10 +13,9 @@ function Tags(): JSX.Element {
         <Link to='/'>Все статьи</Link>
       </div>
       <ul className="tags__list">
-        <li className="tags__item">Жизнь</li>
-        <li className="tags__item">Путешествия</li>
-        <li className="tags__item">Спорт</li>
-        <li className="tags__item">Мода</li>
+        {tags.map((tag: any) => (
+          <li key={tag._id} className="tags__item">{tag.name}</li>
+        ))}
       </ul>
     </section>
   )

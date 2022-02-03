@@ -33,12 +33,22 @@ const usersSlice = createSlice({
     },
     authRequestFailed: (state, action) => {
       state.error = action.payload
+    },
+    userLogOut: (state) => {
+      state.entities = null;
+      state.isLoggedIn = false;
+      state.auth = null;
     }
   }
 });
 
 const { reducer: usersReducer, actions } = usersSlice;
-const { authRequested, authRequestSuccess, authRequestFailed } = actions;
+const {
+  authRequested,
+  authRequestSuccess,
+  authRequestFailed,
+  userLogOut
+} = actions;
 
 export const signUp = (payload) => async (dispatch) => {
   dispatch(authRequested());
@@ -76,6 +86,12 @@ export const signIn = (payload) => async (dispatch) => {
       dispatch(authRequestFailed(error.message));
     }
   }
+};
+
+export const logOut = () => async (dispatch) => {
+  localStorageService.removeAuthData();
+  dispatch(userLogOut());
+  history.push('/');
 }
 
 export const authErrorDelete = () => (dispatch) => {
@@ -83,5 +99,6 @@ export const authErrorDelete = () => (dispatch) => {
 }
 
 export const getAuthErrors = () => (state) => state.users.error;
+export const getLoggedIn = () => (state) => state.users.isLoggedIn;
 
 export default usersReducer;

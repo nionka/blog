@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import tagsReducer from "./tags";
 import usersReducer from "./users";
 
 const rootReducer = combineReducers({
-    users: usersReducer
+    users: usersReducer,
+    tags: tagsReducer
 });
 
 function createStore () {
