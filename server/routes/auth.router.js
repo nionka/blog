@@ -63,10 +63,11 @@ router.post('/signIn', [
             }
 
             const { email, password } = req.body;
+            console.log(email);
 
             const existingUser = await User.findOne({ email });
 
-            if (existingUser) {
+            if (!existingUser) {
                 return res.status(400).json({
                     message: 'EMAIL_NOT_FOUND'
                 });

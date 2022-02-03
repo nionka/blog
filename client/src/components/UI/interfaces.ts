@@ -17,5 +17,27 @@ export interface IInputProp extends IElementProperties {
   placeholder: string;
   type?: string;
   name: string;
+  error?: string;
+  changeHandler: (e: React.ChangeEvent) => void;
+}
+
+export interface IRadioProps {
+  label: string,
+  value: string,
+  options: Array<IOption>,
+  name: string
+  changeHandler: (e: React.ChangeEvent) => void;
+}
+
+interface IOption {
+  name: string,
+  value: string
+}
+
+export interface ICheckbox {
+  label: string;
+  name: string;
+  value: boolean;
+  error?: string;
   changeHandler: (e: React.ChangeEvent) => void;
 }

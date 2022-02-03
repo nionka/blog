@@ -3,10 +3,12 @@ const config = require('config');
 const chalk = require('chalk');
 const mongoose = require('mongoose');
 const routes = require('./routes');
+const cors = require('cors');
 const initDatabase = require('./startUp/initDatabase');
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({extended: false}));
 app.use('/api', routes);
 

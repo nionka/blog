@@ -1,0 +1,28 @@
+.form-radio {
+  margin-top: 20px;
+
+  .options {
+    display: flex;
+    padding: 10px 5px;
+
+    div {
+      margin-right: 10px;
+    }
+
+    label {
+      margin-left: 3px;
+    }
+  }
+}
+
+.form-checkbox {
+  div {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+
+    input {
+      margin-right: 10px;
+    }
+  }
+}

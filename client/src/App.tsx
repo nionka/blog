@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import './app.scss';
 import MainPage from './components/pages/MainPage/MainPage';
 import Authorization from './components/auth/Authorization';
@@ -11,7 +13,7 @@ import LogOut from './components/common/LogOut/LogOut';
 
 function App() {
   return (
-    <Router>
+    <>
       <Header />
       <main className="main">
         <Switch>
@@ -19,11 +21,12 @@ function App() {
           <Route path='/registration' component={Registration} />
           <Route path='/logout' component={LogOut} />
           <Route path='/blog/:id' component={ArticlePage}/>
-          <Route path='/' component={MainPage} />
-        </Switch> 
+          <Route path='/' exact component={MainPage} />
+        </Switch>
+        <ToastContainer />
       </main>
       <Footer />
-    </Router>
+    </>
   );
 }
 
