@@ -22,7 +22,8 @@ function App() {
             <Route path='/authorization' component={Authorization} />
             <Route path='/registration' component={Registration} />
             <Route path='/logout' component={LogOut} />
-            <Route path='/blog/:id' component={ArticlePage}/>
+            <Route path='/article/:id' component={ArticlePage}/>
+            <Route path='/articles' component={MainPage} />
             <Route path='/' exact component={MainPage} />
           </Switch>
           <ToastContainer />

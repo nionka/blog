@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './blogCard.scss';
 
 interface IBlogCardProp {
-  id: number,
+  id: string,
   date: string,
   author: string,
   title: string,
@@ -25,7 +25,7 @@ function BlogCard(props: IBlogCardProp): JSX.Element {
           <div className="card__author">{props.author}</div>
         </header>
         <div className="card__tags">{props.tags}</div>
-        <Link to={`/blog/${props.id}`} className="card__title">{props.title}</Link>
+        <Link to={`/article/${props.id}`} className="card__title">{props.title}</Link>
         <div className="card__description">
           {props.description}
         </div>

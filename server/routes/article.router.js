@@ -5,7 +5,7 @@ const router = express.Router({ mergeParams: true });
 
 router
     .route('/')
-    .get(auth, async (req, res) => {
+    .get(async (req, res) => {
         try {
             const articles = await Article.find();
             res.status(200).send(articles);

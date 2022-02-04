@@ -5,8 +5,9 @@ import { allBlog } from '../../../api/blogs';
 
 type TParams = {id: string}
 
-function Blog({ match }: RouteComponentProps<TParams>): JSX.Element {
+function ArticlePage({ match }: RouteComponentProps<TParams>): JSX.Element {
   const id = Number(match.params.id);
+  console.log('ololo')
   
   const isBlog = allBlog.filter(blog => blog.id === id);
 
@@ -37,4 +38,4 @@ function Blog({ match }: RouteComponentProps<TParams>): JSX.Element {
   )
 }
 
-export default Blog;
+export default ArticlePage;

@@ -14,7 +14,11 @@ function Tags(): JSX.Element {
       </div>
       <ul className="tags__list">
         {tags.map((tag: any) => (
-          <li key={tag._id} className="tags__item">{tag.name}</li>
+          <li key={tag._id} className="tags__item">
+            <Link to={`/articles?category=${tag.name}`}>
+              {tag.name}
+            </Link>
+          </li>
         ))}
       </ul>
     </section>

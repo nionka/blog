@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import articlesReducer from "./articles";
 import tagsReducer from "./tags";
 import usersReducer from "./users";
 
 const rootReducer = combineReducers({
     users: usersReducer,
-    tags: tagsReducer
+    tags: tagsReducer,
+    articles: articlesReducer
 });
 
 function createStore () {
