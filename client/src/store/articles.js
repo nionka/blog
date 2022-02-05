@@ -39,5 +39,10 @@ export const loadArticlesList = () => async (dispatch) => {
 
 export const getArticles = () => (state) => state.articles.entities;
 export const getArticlesLoader = () => (state) => state.articles.isLoading;
+export const getArticlesByUser = (userId) => (state) => {
+  return state.articles.entities
+    ? state.articles.entities.filter((art) => art.userId === userId)
+    : []
+}
 
 export default articlesReducer;

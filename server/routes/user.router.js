@@ -20,7 +20,7 @@ router.patch('/:userId', auth, async (req, res) => {
     }
 })
 
-router.get('/',auth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const users = await User.find();
         res.status(200).send(users);

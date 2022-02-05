@@ -32,7 +32,7 @@ router.post('/signUp', [
             const hashedPassword = await bcrypt.hash(password, 12);
 
             const newUser = await User.create({
-                ...generateRandomImg,
+                ...generateRandomImg(),
                 ...req.body,
                 password: hashedPassword
             });

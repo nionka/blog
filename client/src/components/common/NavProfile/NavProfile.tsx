@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getCurrentUserById } from '../../../store/users';
 import './navProfile.scss';
 
 const NavProfile = () => {
   const [isOpen, setOpen] = useState(false);
+  const currentUser = useSelector(getCurrentUserById());
+
+  if (!currentUser) return null;
 
   const toggleMenu = () => {
     setOpen((prev) => !prev);
@@ -12,14 +17,14 @@ const NavProfile = () => {
   return (
     <div className='profile'>
       <div className='profile__img' onClick={toggleMenu}>
-        <img src="https://avatars.dicebear.com/api/avataaars/23.svg" alt="imgProfile" />
+        <img src={currentUser.image} alt="imgProfile" />
       </div>
-      <div className='profile__name'>Alex</div>
+      <div className='profile__name'>{currentUser.name}</div>
 
       <div className={`profile__menu ${isOpen && 'open'} `}>
         <ul className='profile__list'>
           <li className='profile__item'>
-            <Link to='users/5'>
+            <Link to={`/users/${currentUser._id}`}>
               Профиль
             </Link>
             </li>

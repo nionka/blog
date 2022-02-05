@@ -11,6 +11,7 @@ import Header from './components/common/Header/Header';
 import Footer from './components/common/Footer/Footer';
 import LogOut from './components/common/LogOut/LogOut';
 import AppLoader from './components/hoc/AppLoader';
+import UserPage from './components/pages/UserPage/UserPage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path='/logout' component={LogOut} />
             <Route path='/article/:id' component={ArticlePage}/>
             <Route path='/articles' component={MainPage} />
+            <Route path='/users/:id' component={UserPage} />
             <Route path='/' exact component={MainPage} />
           </Switch>
           <ToastContainer />

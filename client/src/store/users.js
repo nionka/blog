@@ -1,6 +1,7 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
 import authService from '../services/auth.service';
 import localStorageService from '../services/localStorage.service';
+import usersService from '../services/users.service';
 import { errorGenerate } from '../utils/errorGenerate';
 import history from '../utils/history';
 
@@ -10,14 +11,16 @@ const initialState = localStorageService.getAccessToken()
       isLoading: true,
       error: null,
       auth: { userId: localStorageService.getUserId() },
-      isLoggedIn: true
+      isLoggedIn: true,
+      isLoadingUsers: false
     }
   : {
       entities: null,
       isLoading: false,
       error: null,
       auth: null,
-      isLoggedIn: false
+      isLoggedIn: false,
+      isLoadingUsers: false
     };
 
 const usersSlice = createSlice({
@@ -35,9 +38,21 @@ const usersSlice = createSlice({
       state.error = action.payload
     },
     userLogOut: (state) => {
-      state.entities = null;
       state.isLoggedIn = false;
       state.auth = null;
+    },
+    usersReceved: (state, action) => {
+      state.entities = action.payload;
+      state.isLoading = false;
+      state.isLoadingUsers = true;
+    },
+    usersRequested: (state) => {
+      state.isLoading = true;
+    },
+    usersRequestFailed: (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+      state.isLoadingUsers = false;
     }
   }
 });
@@ -47,7 +62,10 @@ const {
   authRequested,
   authRequestSuccess,
   authRequestFailed,
-  userLogOut
+  userLogOut,
+  usersReceved,
+  usersRequestFailed,
+  usersRequested,
 } = actions;
 
 export const signUp = (payload) => async (dispatch) => {
@@ -92,6 +110,16 @@ export const logOut = () => async (dispatch) => {
   localStorageService.removeAuthData();
   dispatch(userLogOut());
   history.push('/');
+};
+
+export const loadUsersList = () => async (dispatch) => {
+  dispatch(usersRequested());
+  try {
+    const data = await usersService.get();
+    dispatch(usersReceved(data));
+  } catch (error) {
+    dispatch(usersRequestFailed(error.message));
+  }
 }
 
 export const authErrorDelete = () => (dispatch) => {
@@ -100,5 +128,14 @@ export const authErrorDelete = () => (dispatch) => {
 
 export const getAuthErrors = () => (state) => state.users.error;
 export const getLoggedIn = () => (state) => state.users.isLoggedIn;
+export const getCurrentUserId = () => (state) => state.users.auth.userId;
+export const getCurrentUserById = () => (state) => {
+  if (state.users.entities) {
+    return state.users.entities.find((user) => user._id === state.users.auth.userId);
+  }
+};
+export const getUsers = () => (state) => state.users.entities;
+export const getUserById = (userId) => (state) => state.users.entities.find((user) => user._id === userId)
+export const getLoadingUsers = () => (state) => state.users.isLoadingUsers;
 
 export default usersReducer;
