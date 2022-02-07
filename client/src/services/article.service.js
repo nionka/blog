@@ -6,6 +6,10 @@ const articlesService = {
   getAll: async () => {
     const { data } = await httpService.get(articlesEndPoint);
     return data;
+  },
+  createArticle: async (payload) => {
+    const { data } = await httpService.post(articlesEndPoint, payload);
+    return data;
   }
 }
 

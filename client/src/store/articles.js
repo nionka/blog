@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import articlesService from '../services/article.service';
+import history from '../utils/history';
 
 const articlesSlice = createSlice({
   name: 'articles',
@@ -15,16 +16,25 @@ const articlesSlice = createSlice({
     articlesReceved: (state, action) => {
       state.entities = action.payload;
       state.isLoading = false;
-  },
-  articlesRequestFiled: (state, action) => {
-        state.error = action.payload;
-        state.isLoading = false;
+    },
+    articlesRequestFiled: (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    },
+    articleCreated: (state, action) => {
+      state.entities.push(action.payload);
     }
+
   }
 });
 
 const { reducer: articlesReducer, actions } = articlesSlice;
-const { articlesRequested, articlesReceved, articlesRequestFiled } = actions;
+const {
+  articlesRequested,
+  articlesReceved,
+  articlesRequestFiled,
+  articleCreated
+} = actions;
 
 export const loadArticlesList = () => async (dispatch) => {
   dispatch(articlesRequested());
@@ -37,12 +47,27 @@ export const loadArticlesList = () => async (dispatch) => {
   }
 };
 
+export const createArticle = (payload) => async (dispatch) => {
+  try {
+    const data = await articlesService.createArticle(payload);
+    dispatch(articleCreated(data));
+    history.push(`/article/${data._id}`);
+  } catch (error) {
+    dispatch(articlesRequestFiled(error.message));
+  }
+}
+
 export const getArticles = () => (state) => state.articles.entities;
 export const getArticlesLoader = () => (state) => state.articles.isLoading;
 export const getArticlesByUser = (userId) => (state) => {
   return state.articles.entities
     ? state.articles.entities.filter((art) => art.userId === userId)
     : []
-}
+};
+export const getArticleById = (articleId) => (state) => {
+  return state.articles.entities
+    ? state.articles.entities.find((art) => art._id === articleId)
+    : null
+};
 
 export default articlesReducer;

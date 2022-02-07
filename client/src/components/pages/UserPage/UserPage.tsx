@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { getArticlesByUser } from '../../../store/articles';
 import { getCurrentUserId, getUserById } from '../../../store/users';
+import history from '../../../utils/history';
 import BlogCard from '../../common/BlogCard/BlogCard';
 import Button from '../../UI/Button';
 import { ButtonColor, ButtonSize } from '../../UI/constants';
@@ -15,6 +16,7 @@ const UserPage = ({ match }: any) => {
 
   const handleAddPost = (e: React.SyntheticEvent) => {
     console.log(e);
+    history.push('/article/add');
   }
   
   return (

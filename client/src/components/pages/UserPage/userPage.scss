@@ -12,6 +12,7 @@
   &__card {
     padding: 20px 30px;
     margin-right: 20px;
+    flex-shrink: 0;
   }
 
   &__img {

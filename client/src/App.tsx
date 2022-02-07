@@ -12,6 +12,7 @@ import Footer from './components/common/Footer/Footer';
 import LogOut from './components/common/LogOut/LogOut';
 import AppLoader from './components/hoc/AppLoader';
 import UserPage from './components/pages/UserPage/UserPage';
+import ArticleForm from './components/common/ArticleForm/ArticleForm';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path='/authorization' component={Authorization} />
             <Route path='/registration' component={Registration} />
             <Route path='/logout' component={LogOut} />
+            <Route path='/article/add' component={ArticleForm} />
             <Route path='/article/:id' component={ArticlePage}/>
             <Route path='/articles' component={MainPage} />
             <Route path='/users/:id' component={UserPage} />

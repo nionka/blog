@@ -41,3 +41,25 @@ export interface ICheckbox {
   error?: string;
   changeHandler: (e: React.ChangeEvent) => void;
 }
+
+export interface IInputSelect {
+  name: string;
+  label: string;
+  value: string;
+  changeHandler: (e: React.ChangeEvent) => void;
+  options: IOptions[];
+}
+
+interface IOptions {
+  _id: string,
+  name: string,
+}
+
+export interface ITextarea {
+  customCssClass?: string;
+  name: string;
+  error?: string;
+  value: string;
+  placeholder: string;
+  changeHandler: (e: React.ChangeEvent) => void;
+}

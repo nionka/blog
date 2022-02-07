@@ -128,11 +128,13 @@ export const authErrorDelete = () => (dispatch) => {
 
 export const getAuthErrors = () => (state) => state.users.error;
 export const getLoggedIn = () => (state) => state.users.isLoggedIn;
-export const getCurrentUserId = () => (state) => state.users.auth.userId;
+export const getCurrentUserId = () => (state) => state.users?.auth?.userId;
 export const getCurrentUserById = () => (state) => {
   if (state.users.entities) {
     return state.users.entities.find((user) => user._id === state.users.auth.userId);
   }
+
+  return null
 };
 export const getUsers = () => (state) => state.users.entities;
 export const getUserById = (userId) => (state) => state.users.entities.find((user) => user._id === userId)

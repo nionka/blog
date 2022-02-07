@@ -3,15 +3,19 @@ export interface IErrors {
   password?: string;
   licence?: string;
   name?: string;
+  title?: string;
+  description?: string;
+  content?: string;
+  image?: string;
 };
 
 export interface IArticle {
-  id: string,
-  date: string,
-  author: string,
+  _id: string,
+  userId: string,
   title: string,
   tags: string,
   description: string,
   content: string,
-  url: string
+  image: string,
+  createdAt: string
 }
