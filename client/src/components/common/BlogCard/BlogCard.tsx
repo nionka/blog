@@ -1,9 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { deleteArticle } from '../../../store/articles';
 import { getTagById } from '../../../store/tags';
-import { getUserById } from '../../../store/users';
+import { getCurrentUserId, getUserById } from '../../../store/users';
 import { dateTransform } from '../../../utils/dateTransform';
+import history from '../../../utils/history';
+import Button from '../../UI/Button';
+import { ButtonColor, ButtonSize } from '../../UI/constants';
 import './blogCard.scss';
 
 interface IBlogCardProp {
@@ -20,22 +24,44 @@ interface IBlogCardProp {
 function BlogCard(props: IBlogCardProp): JSX.Element {
   const author = useSelector(getUserById(props.userId));
   const tag = useSelector(getTagById(props.tags));
+  const currentUserId = useSelector(getCurrentUserId());
+  const dispatch = useDispatch();
+
+  const handleDelete = (e: any) => {
+    console.log('delete', props._id);
+    dispatch(deleteArticle(props._id));
+  }
+
+  const checkControl = () => currentUserId === props.userId && history.location.pathname !== '/';
 
   return (
     <article className="card">
       <div className="card__img">
         <img src={props.image} alt={props.title} />
       </div>
-      <div className="card__content">
-        <header className="card__header">
-          <div className="card__date">{dateTransform(props.createdAt)}</div>
-          <div className="card__author">{author.name}</div>
-        </header>
-        <div className="card__tags">{tag.name}</div>
-        <Link to={`/article/${props._id}`} className="card__title">{props.title}</Link>
-        <div className="card__description">
-          {props.description}
+      <div className='card__body'>
+        <div className="card__content">
+          <header className="card__header">
+            <div className="card__date">{dateTransform(props.createdAt)}</div>
+            <div className="card__author">{author.name}</div>
+          </header>
+          <div className="card__tags">{tag.name}</div>
+          <Link to={`/article/${props._id}`} className="card__title">{props.title}</Link>
+          <div className="card__description">
+            {props.description}
+          </div>  
         </div>
+        {checkControl() && (
+          <div className='card__control'>
+          <Button
+            color={ButtonColor.PRIMARY}
+            size={ButtonSize.SMALL}
+            clickHandler={handleDelete}
+          >
+            Удалить
+          </Button>
+        </div>
+        )} 
       </div> 
     </article>
   )

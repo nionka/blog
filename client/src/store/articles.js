@@ -23,6 +23,9 @@ const articlesSlice = createSlice({
     },
     articleCreated: (state, action) => {
       state.entities.push(action.payload);
+    },
+    articleDeleted: (state, action) => {
+      state.entities = state.entities.filter((art) => art._id !== action.payload);
     }
 
   }
@@ -33,7 +36,8 @@ const {
   articlesRequested,
   articlesReceved,
   articlesRequestFiled,
-  articleCreated
+  articleCreated,
+  articleDeleted
 } = actions;
 
 export const loadArticlesList = () => async (dispatch) => {
@@ -52,6 +56,17 @@ export const createArticle = (payload) => async (dispatch) => {
     const data = await articlesService.createArticle(payload);
     dispatch(articleCreated(data));
     history.push(`/article/${data._id}`);
+  } catch (error) {
+    dispatch(articlesRequestFiled(error.message));
+  }
+};
+
+export const deleteArticle = (articleId) => async (dispatch) => {
+  try {
+    const data = await articlesService.deleteArticle(articleId);
+    if (!data) {
+      dispatch(articleDeleted(articleId));
+    }
   } catch (error) {
     dispatch(articlesRequestFiled(error.message));
   }

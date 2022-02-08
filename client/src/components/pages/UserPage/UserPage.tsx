@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { IArticle } from '../../../interfaces/interfaces';
 import { getArticlesByUser } from '../../../store/articles';
 import { getCurrentUserId, getUserById } from '../../../store/users';
 import history from '../../../utils/history';
@@ -50,7 +51,7 @@ const UserPage = ({ match }: any) => {
             {articles.length === 0 ? (
               <p className='card'>Здесь пока ничего нет</p>
             ) : (
-              articles.map((art: any) => <BlogCard {...art} />)
+              articles.map((art: IArticle) => <BlogCard key={art._id} {...art} />)
             )
             }
         </div>

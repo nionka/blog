@@ -10,8 +10,22 @@ const NavProfile = () => {
 
   if (!currentUser) return null;
 
+  const body = document.querySelector('body');
+
   const toggleMenu = () => {
-    setOpen((prev) => !prev);
+    setOpen(!isOpen);
+  }
+
+  const checkClick = (e: any) => {
+    if (!e.target.closest('.profile')) {
+      setOpen(false);
+    }
+  }
+
+  if (isOpen) {
+    body?.addEventListener('click', checkClick);
+  } else {
+    body?.removeEventListener('click', checkClick);
   }
 
   return (
@@ -24,7 +38,7 @@ const NavProfile = () => {
       <div className={`profile__menu ${isOpen && 'open'} `}>
         <ul className='profile__list'>
           <li className='profile__item'>
-            <Link to={`/users/${currentUser._id}`}>
+            <Link to={`/users/${currentUser._id}`} onClick={toggleMenu}>
               Профиль
             </Link>
             </li>

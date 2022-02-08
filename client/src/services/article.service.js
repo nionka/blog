@@ -10,6 +10,10 @@ const articlesService = {
   createArticle: async (payload) => {
     const { data } = await httpService.post(articlesEndPoint, payload);
     return data;
+  },
+  deleteArticle: async (articleId) => {
+    const { data } = await httpService.delete(articlesEndPoint + articleId);
+    return data;
   }
 }
 

@@ -32,8 +32,8 @@ router
 
 router.delete('/:articleId', auth, async (req, res) => {
     try {
-        const { articleId } = req.params;
-        const removedArticle = await Comment.findById(articleId);
+        const { articleId } = req.params;        
+        const removedArticle = await Article.findById(articleId);
 
         if (removedArticle.userId.toString() === req.user._id) {
             await removedArticle.remove();

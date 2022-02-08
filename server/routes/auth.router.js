@@ -100,7 +100,7 @@ router.post('/token', async (req, res) => {
         const data = tokenService.validateRefreshToken(refreshToken);
         const dbToken = await tokenService.findToken(refreshToken);
 
-        if (!data || !dbToken || data._id === dbToken?.user?.toString()) {
+        if (!data || !dbToken || data._id !== dbToken?.user?.toString()) {
             return res.status(400).json({
                 message: 'Unauthorized'
             })
