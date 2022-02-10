@@ -28,8 +28,11 @@ function BlogCard(props: IBlogCardProp): JSX.Element {
   const dispatch = useDispatch();
 
   const handleDelete = (e: any) => {
-    console.log('delete', props._id);
     dispatch(deleteArticle(props._id));
+  };
+
+  const handleEdit = () => {
+    history.push(`/articles/${props._id}/edit`);
   }
 
   const checkControl = () => currentUserId === props.userId && history.location.pathname !== '/';
@@ -46,21 +49,29 @@ function BlogCard(props: IBlogCardProp): JSX.Element {
             <div className="card__author">{author.name}</div>
           </header>
           <div className="card__tags">{tag.name}</div>
-          <Link to={`/article/${props._id}`} className="card__title">{props.title}</Link>
+          <Link to={`/articles/${props._id}`} className="card__title">{props.title}</Link>
           <div className="card__description">
             {props.description}
           </div>  
         </div>
         {checkControl() && (
           <div className='card__control'>
-          <Button
-            color={ButtonColor.PRIMARY}
-            size={ButtonSize.SMALL}
-            clickHandler={handleDelete}
-          >
-            Удалить
-          </Button>
-        </div>
+            <Button
+              color={ButtonColor.PRIMARY}
+              size={ButtonSize.SMALL}
+              clickHandler={handleEdit}
+            >
+              Редактировать
+            </Button>
+            <Button
+              customCssClass='ml'
+              color={ButtonColor.PRIMARY}
+              size={ButtonSize.SMALL}
+              clickHandler={handleDelete}
+            >
+              Удалить
+            </Button>
+          </div>
         )} 
       </div> 
     </article>

@@ -105,6 +105,7 @@ function Registration(): JSX.Element {
           type='text'
           placeholder="Email"
           name='email'
+          value={data.email}
           changeHandler={(e) => handleChange(e)}
           error={errors.email}
         />
@@ -113,6 +114,7 @@ function Registration(): JSX.Element {
           type='text'
           placeholder="Пароль"
           name='password'
+          value={data.password}
           changeHandler={(e) => handleChange(e)}
           error={errors.password}
         />
@@ -121,6 +123,7 @@ function Registration(): JSX.Element {
           type='text'
           placeholder="Имя"
           name='name'
+          value={data.name}
           changeHandler={(e) => handleChange(e)}
           error={errors.name}
         />

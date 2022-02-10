@@ -24,8 +24,9 @@ function App() {
             <Route path='/authorization' component={Authorization} />
             <Route path='/registration' component={Registration} />
             <Route path='/logout' component={LogOut} />
-            <Route path='/article/add' component={ArticleForm} />
-            <Route path='/article/:id' component={ArticlePage}/>
+            <Route path='/articles/add' component={ArticleForm} />
+            <Route path='/articles/:id/edit' component={ArticleForm} />
+            <Route path='/articles/:id' component={ArticlePage}/>
             <Route path='/articles' component={MainPage} />
             <Route path='/users/:id' component={UserPage} />
             <Route path='/' exact component={MainPage} />

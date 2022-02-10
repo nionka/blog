@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getArticlesLoader, loadArticlesList } from '../../store/articles';
+import { getArticlesListLoader, loadArticlesList } from '../../store/articles';
 import { getTagsLoader, loadTagsList } from '../../store/tags';
 import { getLoadingUsers, loadUsersList } from '../../store/users';
+import Loader from '../Loader/Loader';
 
 const AppLoader = ({ children }: any): JSX.Element => {
   const dispatch = useDispatch();
   const tagsLoader = useSelector(getTagsLoader());
-  const articlesLoader = useSelector(getArticlesLoader());
+  const articlesLoader = useSelector(getArticlesListLoader());
   const usersLoader = useSelector(getLoadingUsers());
 
   useEffect(() => {
@@ -16,7 +17,7 @@ const AppLoader = ({ children }: any): JSX.Element => {
     dispatch(loadUsersList());
   }, []);
 
-  if (tagsLoader || articlesLoader || !usersLoader) return <p>Loading...</p>
+  if (tagsLoader || articlesLoader || !usersLoader) return <Loader />
 
   return children;
 }

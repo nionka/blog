@@ -16,8 +16,7 @@ const UserPage = ({ match }: any) => {
   const articles = useSelector(getArticlesByUser(userId));
 
   const handleAddPost = (e: React.SyntheticEvent) => {
-    console.log(e);
-    history.push('/article/add');
+    history.push('/articles/add');
   }
   
   return (

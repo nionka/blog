@@ -77,6 +77,7 @@ function Authorization(): JSX.Element {
           type='text'
           placeholder="Email"
           name='email'
+          value={data.email}
           changeHandler={(e) => handleChange(e)}
           error={errors.email}
         />
@@ -85,6 +86,7 @@ function Authorization(): JSX.Element {
           type='text'
           placeholder="Пароль"
           name='password'
+          value={data.password}
           changeHandler={(e) => handleChange(e)}
           error={errors.password}
         />

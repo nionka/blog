@@ -6,18 +6,20 @@ const articlesSlice = createSlice({
   name: 'articles',
   initialState: {
     entities: null,
+    article: null,
+    isLoadingArticle: true,
     isLoading: true,
     error: null
   },
   reducers: {
-    articlesRequested: (state) => {
+    articlesListRequested: (state) => {
       state.isLoading = true;
     },
-    articlesReceved: (state, action) => {
+    articlesListReceved: (state, action) => {
       state.entities = action.payload;
       state.isLoading = false;
     },
-    articlesRequestFiled: (state, action) => {
+    articlesListRequestFiled: (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
     },
@@ -26,6 +28,17 @@ const articlesSlice = createSlice({
     },
     articleDeleted: (state, action) => {
       state.entities = state.entities.filter((art) => art._id !== action.payload);
+    },
+    articleFiled: (state, action) => {
+      state.error = action.payload;
+      state.isLoadingArticle = false;
+    },
+    articleRequested: (state) => {
+      state.isLoadingArticle = true;
+    },
+    articleReceved: (state, action) => {
+      state.article = action.payload;
+      state.isLoadingArticle = false;
     }
 
   }
@@ -33,21 +46,24 @@ const articlesSlice = createSlice({
 
 const { reducer: articlesReducer, actions } = articlesSlice;
 const {
-  articlesRequested,
-  articlesReceved,
-  articlesRequestFiled,
+  articlesListRequested,
+  articlesListReceved,
+  articlesListRequestFiled,
   articleCreated,
-  articleDeleted
+  articleDeleted,
+  articleReceved,
+  articleFiled,
+  articleRequested
 } = actions;
 
 export const loadArticlesList = () => async (dispatch) => {
-  dispatch(articlesRequested());
+  dispatch(articlesListRequested());
 
   try {
     const data = await articlesService.getAll();
-    dispatch(articlesReceved(data));
+    dispatch(articlesListReceved(data));
   } catch (error) {
-    dispatch(articlesRequestFiled(error.message));
+    dispatch(articlesListRequestFiled(error.message));
   }
 };
 
@@ -55,11 +71,34 @@ export const createArticle = (payload) => async (dispatch) => {
   try {
     const data = await articlesService.createArticle(payload);
     dispatch(articleCreated(data));
-    history.push(`/article/${data._id}`);
+    history.push(`/articles/${data._id}`);
   } catch (error) {
-    dispatch(articlesRequestFiled(error.message));
+    dispatch(articleFiled(error.message));
   }
 };
+
+export const loadArticle = (articleId) => async (dispatch) => {
+  dispatch(articleRequested());
+  try {
+    const data = await articlesService.getArticle(articleId);
+    dispatch(articleReceved(data));
+    
+  } catch (error) {
+    dispatch(articleFiled(error.message));
+  }
+};
+
+export const updateArticle = (articleId, payload) => async (dispatch) => {
+  try {
+    const data = await articlesService.updateArticle(articleId, payload);
+    if (data) {
+      dispatch(articleReceved(data));
+      history.push(`/articles/${data._id}`);
+    }
+  } catch (error) {
+    dispatch(articleFiled(error.message));
+  }
+}
 
 export const deleteArticle = (articleId) => async (dispatch) => {
   try {
@@ -68,21 +107,18 @@ export const deleteArticle = (articleId) => async (dispatch) => {
       dispatch(articleDeleted(articleId));
     }
   } catch (error) {
-    dispatch(articlesRequestFiled(error.message));
+    dispatch(articleFiled(error.message));
   }
-}
+};
 
 export const getArticles = () => (state) => state.articles.entities;
-export const getArticlesLoader = () => (state) => state.articles.isLoading;
+export const getArticlesListLoader = () => (state) => state.articles.isLoading;
 export const getArticlesByUser = (userId) => (state) => {
   return state.articles.entities
     ? state.articles.entities.filter((art) => art.userId === userId)
     : []
 };
-export const getArticleById = (articleId) => (state) => {
-  return state.articles.entities
-    ? state.articles.entities.find((art) => art._id === articleId)
-    : null
-};
+export const getArticle = () => (state) => state.articles.article;
+export const getArticleLoader = () => (state) => state.articles.isLoadingArticle;
 
 export default articlesReducer;

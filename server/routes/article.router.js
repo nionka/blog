@@ -8,7 +8,12 @@ router
     .get(async (req, res) => {
         try {
             const articles = await Article.find();
-            res.status(200).send(articles);
+            const newArrayArticles = articles.map((art) => {
+                const { _id, image, description, userId, createdAt, title, tags } = art;
+                return { _id, image, description, userId, createdAt, title, tags };
+            });
+
+            res.status(200).send(newArrayArticles);
         } catch (error) {
             res.status(500).json({
                 message: 'Что-то пошло не так, попробуйте позже'
@@ -29,6 +34,45 @@ router
             });
         }
     });
+
+router.get('/:articleId', async (req, res) => {
+    try {
+        const { articleId } = req.params;
+        const article = await Article.findById(articleId);
+
+        if (article) {
+            res.status(200).send(article);
+        } else {
+            res.status(400).json({
+                message: 'ARTICLE_NOT_FOUND'
+            });
+        }
+        
+    } catch (error) {
+        res.status(500).json({
+            message: 'Что-то пошло не так, попробуйте позже'
+        });
+    }
+});
+
+router.put('/:articleId', auth, async (req, res) => {
+    try {
+        const { articleId } = req.params;
+        const updatedArticle = await Article.findByIdAndUpdate(articleId, req.body, { new: true });
+        if (updatedArticle) {
+            res.status(200).send(updatedArticle);
+        } else {
+            res.status(400).json({
+                message: 'ERROR'
+            });
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            message: 'Что-то пошло не так, попробуйте позже'
+        });
+    }
+});
 
 router.delete('/:articleId', auth, async (req, res) => {
     try {

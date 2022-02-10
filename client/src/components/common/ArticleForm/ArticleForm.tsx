@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IErrors } from '../../../interfaces/interfaces';
-import { createArticle } from '../../../store/articles';
+import { createArticle, getArticle, getArticleLoader, loadArticle, updateArticle } from '../../../store/articles';
 import { getTags } from '../../../store/tags';
 import { getCurrentUserId } from '../../../store/users';
 import history from '../../../utils/history';
@@ -13,41 +13,30 @@ import InputText from '../../UI/InputText';
 import InputTextarea from '../../UI/InputTextarea';
 import './articleForm.scss';
 
-const ArticleForm = () => {
-  const [data, setData] = useState({
+const ArticleForm = ({ match }: any) => {
+  const { id } = match.params;
+  const articleLoader = useSelector(getArticleLoader());
+  const article = useSelector(getArticle());
+
+  const initialState = id ? {
+    title: article?.title,
+    description: article?.description,
+    content: article?.content,
+    image: article?.image,
+    tags: article?.tags
+  } : {
     title: '',
     description: '',
     content: '',
     image: '',
     tags: ''
-  });
+  };
+
+  const [data, setData] = useState(initialState);
   const [errors, setErrors] = useState<IErrors>({});
   const currentUserId = useSelector(getCurrentUserId());
   const AllTags = useSelector(getTags());
   const dispatch = useDispatch();
-
-  if (!currentUserId) history.push('/');
-
-  useEffect(() => {
-    validate();
-  }, [data]);
-
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setData((prev) => ({ ...prev, [name]: value }));
-  }
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-
-    const isValid = validate();
-    if (!isValid) return;
-    const newArticle = {
-      userId: currentUserId,
-      ...data
-    };
-    dispatch(createArticle(newArticle));
-  }
 
   const validatorConfig = {
     title: {
@@ -70,7 +59,7 @@ const ArticleForm = () => {
         message: 'Пост не может быть пустым'
       }
     }
-  }
+  };
 
   const validate = () => {
     const error: any = validator(data, validatorConfig);
@@ -78,15 +67,66 @@ const ArticleForm = () => {
     return Object.keys(error).length === 0;
   }
 
+  useEffect(() => {
+    if (id) {
+      if (!articleLoader) {
+        validate();
+      }
+    } else {
+      validate();
+    }  
+  }, [data]);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(loadArticle(id));
+    }
+  }, []);
+
+  useEffect(() => {
+    setData(initialState)
+  }, [articleLoader])
+
+  if (!currentUserId) history.push('/');
+
+  if (id && article?.userId !== currentUserId) history.push('/');
+
+  if (id && articleLoader) {
+    return <p>Loader...</p>
+  }
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setData((prev) => ({ ...prev, [name]: value }));
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    const isValid = validate();
+    if (!isValid) return;
+    const newArticle = {
+      userId: currentUserId,
+      ...data
+    };
+
+    if (id) {
+      dispatch(updateArticle(id, data));
+    } else {
+      dispatch(createArticle(newArticle));
+    }  
+  }
+
   return (
     <section className='articleForm'>
       <div className="container">
-        <h2>Новый пост</h2>
+        <h2>{id ? 'Редактировать пост' : 'Новый пост'}</h2>
         <form className='articleForm__form' onSubmit={handleSubmit}>
           <InputText
             customCssClass='mb'
             type='text'
             name='title'
+            value={data.title}
             placeholder='Заголовок'
             error={errors.title}
             changeHandler={(e) => handleChange(e)}
@@ -95,6 +135,7 @@ const ArticleForm = () => {
             customCssClass='mb'
             type='text'
             name='image'
+            value={data.image}
             placeholder='Ссылка на картинку'
             error={errors.image}
             changeHandler={(e) => handleChange(e)}
@@ -102,7 +143,7 @@ const ArticleForm = () => {
           <InputSelect
             label='Выберите тег'
             name='tags'
-            value={data.tags}
+            defaultValue={data.tags}
             options={AllTags}
             changeHandler={(e) => handleChange(e)}
           />

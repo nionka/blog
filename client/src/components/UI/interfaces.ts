@@ -15,6 +15,7 @@ export interface IButtonProp extends IElementProperties {
 
 export interface IInputProp extends IElementProperties {
   placeholder: string;
+  value: string;
   type?: string;
   name: string;
   error?: string;
@@ -45,9 +46,9 @@ export interface ICheckbox {
 export interface IInputSelect {
   name: string;
   label: string;
-  value: string;
-  changeHandler: (e: React.ChangeEvent) => void;
+  defaultValue: string;
   options: IOptions[];
+  changeHandler: (e: React.ChangeEvent) => void; 
 }
 
 interface IOptions {

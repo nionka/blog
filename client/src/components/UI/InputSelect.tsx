@@ -13,11 +13,19 @@ const InputSelect = (props: IInputSelect) => {
         className='form-select'
         name={props.name}
         onChange={(e) => handleChange(e)}
+        value={props.defaultValue}
       >
-        <option selected value="">
-          {props.label}      
+        <option value="">
+          {props.label}    
         </option>
-        {props.options.map((opt) => <option key={opt._id} value={opt._id}>{opt.name}</option>)}
+        {props.options.map((opt) => (
+            <option
+              key={opt._id}
+              value={opt._id}
+            >
+              {opt.name}
+            </option>
+          ))}
       </select>
     </>
   )

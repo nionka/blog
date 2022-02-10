@@ -1,7 +1,7 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { getArticleById } from '../../../store/articles';
+import { getArticle, getArticleLoader, loadArticle } from '../../../store/articles';
 import { getTagById } from '../../../store/tags';
 import { getUserById } from '../../../store/users';
 import { dateTransform } from '../../../utils/dateTransform';
@@ -11,12 +11,18 @@ type TParams = {id: string}
 
 function ArticlePage({ match }: RouteComponentProps<TParams>): JSX.Element {
   const id = match.params.id;
-  const article = useSelector(getArticleById(id));
-  const author = useSelector(getUserById(article.userId));
-  const tag = useSelector(getTagById(article.tags));
+  const articleLoader = useSelector(getArticleLoader());
+  const article = useSelector(getArticle());
+  const author = useSelector(getUserById(article?.userId));
+  const tag = useSelector(getTagById(article?.tags));
+  const dispatch = useDispatch();
 
-  if (!article) {
-    return <div>Нет такого поста</div>
+  useEffect(() => {
+    dispatch(loadArticle(id));
+  }, []);
+
+  if (articleLoader) {
+    return <div>Loader</div>
   }
 
   return (

@@ -19,6 +19,7 @@ function InputText(props: IInputProp) {
         onChange={(e) => handleChange(e)}
         placeholder={props.placeholder}
         name={props.name}
+        value={props.value}
         type="text" 
       />
       {props.error && (
