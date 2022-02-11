@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getArticlesListLoader, loadArticlesList } from '../../store/articles';
 import { getTagsLoader, loadTagsList } from '../../store/tags';
 import { getLoadingUsers, loadUsersList } from '../../store/users';
-import Loader from '../Loader/Loader';
+import Loader from '../common/Loader/Loader';
 
 const AppLoader = ({ children }: any): JSX.Element => {
   const dispatch = useDispatch();

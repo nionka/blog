@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import './app.scss';
@@ -13,6 +13,7 @@ import LogOut from './components/common/LogOut/LogOut';
 import AppLoader from './components/hoc/AppLoader';
 import UserPage from './components/pages/UserPage/UserPage';
 import ArticleForm from './components/common/ArticleForm/ArticleForm';
+import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
   return (
@@ -24,12 +25,13 @@ function App() {
             <Route path='/authorization' component={Authorization} />
             <Route path='/registration' component={Registration} />
             <Route path='/logout' component={LogOut} />
-            <Route path='/articles/add' component={ArticleForm} />
-            <Route path='/articles/:id/edit' component={ArticleForm} />
+            <PrivateRoute path='/articles/add' component={ArticleForm} />
+            <PrivateRoute path='/articles/:id/edit' component={ArticleForm} />
             <Route path='/articles/:id' component={ArticlePage}/>
             <Route path='/articles' component={MainPage} />
             <Route path='/users/:id' component={UserPage} />
             <Route path='/' exact component={MainPage} />
+            <Redirect to='/' />
           </Switch>
           <ToastContainer />
         </main>
