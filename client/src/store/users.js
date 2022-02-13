@@ -1,27 +1,32 @@
+/* eslint-disable max-len */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import authService from '../services/auth.service';
-import localStorageService from '../services/localStorage.service';
+import {
+  getAccessToken, getUserId, removeAuthData, setTokens,
+} from '../services/localStorage.service';
 import usersService from '../services/users.service';
-import { errorGenerate } from '../utils/errorGenerate';
+import errorGenerate from '../utils/errorGenerate';
 import history from '../utils/history';
 
-const initialState = localStorageService.getAccessToken()
+const initialState = getAccessToken()
   ? {
-      entities: null,
-      isLoading: true,
-      error: null,
-      auth: { userId: localStorageService.getUserId() },
-      isLoggedIn: true,
-      isLoadingUsers: false
-    }
+    entities: null,
+    isLoading: true,
+    error: null,
+    auth: { userId: getUserId() },
+    isLoggedIn: true,
+    isLoadingUsers: false,
+  }
   : {
-      entities: null,
-      isLoading: false,
-      error: null,
-      auth: null,
-      isLoggedIn: false,
-      isLoadingUsers: false
-    };
+    entities: null,
+    isLoading: false,
+    error: null,
+    auth: null,
+    isLoggedIn: false,
+    isLoadingUsers: false,
+  };
 
 const usersSlice = createSlice({
   name: 'users',
@@ -35,7 +40,7 @@ const usersSlice = createSlice({
       state.isLoggedIn = true;
     },
     authRequestFailed: (state, action) => {
-      state.error = action.payload
+      state.error = action.payload;
     },
     userLogOut: (state) => {
       state.isLoggedIn = false;
@@ -53,8 +58,8 @@ const usersSlice = createSlice({
       state.error = action.payload;
       state.isLoading = false;
       state.isLoadingUsers = false;
-    }
-  }
+    },
+  },
 });
 
 const { reducer: usersReducer, actions } = usersSlice;
@@ -73,7 +78,7 @@ export const signUp = (payload) => async (dispatch) => {
 
   try {
     const data = await authService.register(payload);
-    localStorageService.setTokens(data);
+    setTokens(data);
     dispatch(authRequestSuccess({ userId: data.userId }));
     history.push('/');
   } catch (error) {
@@ -92,7 +97,7 @@ export const signIn = (payload) => async (dispatch) => {
 
   try {
     const data = await authService.login(payload);
-    localStorageService.setTokens(data);
+    setTokens(data);
     dispatch(authRequestSuccess({ userId: data.userId }));
     history.push('/');
   } catch (error) {
@@ -107,7 +112,7 @@ export const signIn = (payload) => async (dispatch) => {
 };
 
 export const logOut = () => async (dispatch) => {
-  localStorageService.removeAuthData();
+  removeAuthData();
   dispatch(userLogOut());
   history.push('/');
 };
@@ -120,24 +125,24 @@ export const loadUsersList = () => async (dispatch) => {
   } catch (error) {
     dispatch(usersRequestFailed(error.message));
   }
-}
+};
 
 export const authErrorDelete = () => (dispatch) => {
   dispatch(authRequested());
-}
+};
 
 export const getAuthErrors = () => (state) => state.users.error;
 export const getLoggedIn = () => (state) => state.users.isLoggedIn;
 export const getCurrentUserId = () => (state) => state.users?.auth?.userId;
-export const getCurrentUserById = () => (state) => {
+export const getCurrentUserById = () => function (state) {
   if (state.users.entities) {
     return state.users.entities.find((user) => user._id === state.users.auth.userId);
   }
 
-  return null
+  return null;
 };
 export const getUsers = () => (state) => state.users.entities;
-export const getUserById = (userId) => (state) => state.users.entities.find((user) => user._id === userId)
+export const getUserById = (userId) => (state) => state.users.entities.find((user) => user._id === userId);
 export const getLoadingUsers = () => (state) => state.users.isLoadingUsers;
 
 export default usersReducer;

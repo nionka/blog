@@ -4,58 +4,50 @@ import { Link } from 'react-router-dom';
 import { deleteArticle } from '../../../store/articles';
 import { getTagById } from '../../../store/tags';
 import { getCurrentUserId, getUserById } from '../../../store/users';
-import { dateTransform } from '../../../utils/dateTransform';
+import { IArticleCardProps } from '../../../types/interfaces/IArticleCardProps';
+import dateTransform from '../../../utils/dateTransform';
 import history from '../../../utils/history';
 import Button from '../../UI/Button';
 import { ButtonColor, ButtonSize } from '../../UI/constants';
-import './blogCard.scss';
+import './articleCard.scss';
 
-interface IBlogCardProp {
-  _id: string,
-  userId: string,
-  title: string,
-  description: string,
-  image: string,
-  tags: string,
-  content: string,
-  createdAt: string
-}
-
-function BlogCard(props: IBlogCardProp): JSX.Element {
-  const author = useSelector(getUserById(props.userId));
-  const tag = useSelector(getTagById(props.tags));
+function ArticleCard({
+  userId, tags, _id, title, description, image, createdAt,
+}: IArticleCardProps) {
+  const author = useSelector(getUserById(userId));
+  const tag = useSelector(getTagById(tags));
   const currentUserId = useSelector(getCurrentUserId());
   const dispatch = useDispatch();
 
-  const handleDelete = (e: any) => {
-    dispatch(deleteArticle(props._id));
+  const handleDelete = (): void => {
+    dispatch(deleteArticle(_id));
   };
 
-  const handleEdit = () => {
-    history.push(`/articles/${props._id}/edit`);
-  }
+  const handleEdit = (): void => {
+    history.push(`/articles/${_id}/edit`);
+  };
 
-  const checkControl = () => currentUserId === props.userId && history.location.pathname !== '/';
+  const checkControl = (): boolean => currentUserId === userId && history.location.pathname !== '/';
 
   return (
     <article className="card">
       <div className="card__img">
-        <img src={props.image} alt={props.title} />
+        <img src={image} alt={title} />
       </div>
-      <div className='card__body'>
+      <div className="card__body">
         <div className="card__content">
           <header className="card__header">
-            <div className="card__date">{dateTransform(props.createdAt)}</div>
+            <div className="card__date">{dateTransform(createdAt)}</div>
             <div className="card__author">{author.name}</div>
           </header>
           <div className="card__tags">{tag.name}</div>
-          <Link to={`/articles/${props._id}`} className="card__title">{props.title}</Link>
+          <Link to={`/articles/${_id}`} className="card__title">{title}</Link>
           <div className="card__description">
-            {props.description}
-          </div>  
+            {description}
+          </div>
         </div>
         {checkControl() && (
-          <div className='card__control'>
+          <div className="card__control">
             <Button
               color={ButtonColor.SECONDARY}
               size={ButtonSize.SMALL}
@@ -64,7 +56,7 @@ function BlogCard(props: IBlogCardProp): JSX.Element {
               Редактировать
             </Button>
             <Button
-              customCssClass='ml'
+              customCssClass="ml"
               color={ButtonColor.SECONDARY}
               size={ButtonSize.SMALL}
               clickHandler={handleDelete}
@@ -72,10 +64,10 @@ function BlogCard(props: IBlogCardProp): JSX.Element {
               Удалить
             </Button>
           </div>
-        )} 
-      </div> 
+        )}
+      </div>
     </article>
-  )
+  );
 }
 
-export default BlogCard;
+export default ArticleCard;

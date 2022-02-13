@@ -1,4 +1,4 @@
-import httpService from "./http.service";
+import httpService from './http.service';
 
 const articlesEndPoint = 'articles/';
 
@@ -17,12 +17,12 @@ const articlesService = {
   },
   updateArticle: async (articleId, payload) => {
     const { data } = await httpService.put(articlesEndPoint + articleId, payload);
-    return data
+    return data;
   },
   deleteArticle: async (articleId) => {
     const { data } = await httpService.delete(articlesEndPoint + articleId);
     return data;
-  }
-}
+  },
+};
 
 export default articlesService;

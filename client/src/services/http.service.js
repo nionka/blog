@@ -1,42 +1,43 @@
+/* eslint-disable no-param-reassign */
 import axios from 'axios';
 import configFile from '../config.json';
 import authService from './auth.service';
-import localStorageService from './localStorage.service';
+import {
+  getAccessToken, getRefreshToken, getTokenExpiresDate, setTokens,
+} from './localStorage.service';
 
 const http = axios.create({
-  baseURL: configFile.apiEndPoint
+  baseURL: configFile.apiEndPoint,
 });
 
 http.interceptors.request.use(
-  async function(config) {
-    const expiresDate = localStorageService.getTokenExpiresDate();
-    const refreshToken = localStorageService.getRefreshToken();
+  async (config) => {
+    const expiresDate = getTokenExpiresDate();
+    const refreshToken = getRefreshToken();
     const isExpired = refreshToken && expiresDate < Date.now();
 
     if (isExpired) {
       const data = await authService.refresh();
-      localStorageService.setTokens(data);
+      setTokens(data);
     }
-    const accessToken = localStorageService.getAccessToken();
+    const accessToken = getAccessToken();
     if (accessToken) {
       config.headers = {
         ...config.headers,
-        Authorization: `Bearer ${accessToken}`
-      }
+        Authorization: `Bearer ${accessToken}`,
+      };
     }
 
     return config;
   },
-  function (error) {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error),
 );
 
 const httpService = {
   get: http.get,
   post: http.post,
   put: http.put,
-  delete: http.delete
+  delete: http.delete,
 };
 
 export default httpService;

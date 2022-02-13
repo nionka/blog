@@ -1,14 +1,12 @@
-import { useSelector } from "react-redux";
-import { Redirect, Route } from "react-router-dom";
-import { getLoggedIn } from "../store/users";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-props-no-spreading */
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Redirect, Route } from 'react-router-dom';
+import { getLoggedIn } from '../store/users';
+import { IPrivateRoute } from '../types/interfaces/IPrivateRoute';
 
-interface IProtectedRoute {
-  component?: Function,
-  children?: any,
-  path?: string
-}
-
-const PrivateRoute = ({ component: Component, children, ...rest }: IProtectedRoute): JSX.Element => {
+function PrivateRoute({ component: Component, children, ...rest }: IPrivateRoute) {
   const isLoggedIn = useSelector(getLoggedIn());
 
   return (
@@ -18,9 +16,9 @@ const PrivateRoute = ({ component: Component, children, ...rest }: IProtectedRou
         if (!isLoggedIn) {
           return (
             <Redirect to={{
-                pathname: '/authorization',
-                state: { from: props.location }
-              }}
+              pathname: '/authorization',
+              state: { from: props.location },
+            }}
             />
           );
         }

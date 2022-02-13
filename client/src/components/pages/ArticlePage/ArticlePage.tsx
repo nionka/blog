@@ -4,13 +4,12 @@ import { RouteComponentProps } from 'react-router';
 import { getArticle, getArticleLoader, loadArticle } from '../../../store/articles';
 import { getTagById } from '../../../store/tags';
 import { getUserById } from '../../../store/users';
-import { dateTransform } from '../../../utils/dateTransform';
+import { TParams } from '../../../types/TParams';
+import dateTransform from '../../../utils/dateTransform';
 import './article.scss';
 
-type TParams = {id: string}
-
-function ArticlePage({ match }: RouteComponentProps<TParams>): JSX.Element {
-  const id = match.params.id;
+function ArticlePage({ match }: RouteComponentProps<TParams>) {
+  const { id } = match.params;
   const articleLoader = useSelector(getArticleLoader());
   const article = useSelector(getArticle());
   const author = useSelector(getUserById(article?.userId));
@@ -22,7 +21,7 @@ function ArticlePage({ match }: RouteComponentProps<TParams>): JSX.Element {
   }, []);
 
   if (articleLoader) {
-    return <div>Loader</div>
+    return <div>Loader</div>;
   }
 
   return (
@@ -33,7 +32,10 @@ function ArticlePage({ match }: RouteComponentProps<TParams>): JSX.Element {
           <div className="blog__date">{dateTransform(article.createdAt)}</div>
           <div className="blog__tags">{tag.name}</div>
         </header>
-        <div className="blog__author">Автор: <span>{author.name}</span></div>
+        <div className="blog__author">
+          Автор:
+          <span>{author.name}</span>
+        </div>
 
         <div className="blog__img">
           <img src={article.image} alt={article.title} />
@@ -41,9 +43,9 @@ function ArticlePage({ match }: RouteComponentProps<TParams>): JSX.Element {
         <div className="blog__content">
           {article.content}
         </div>
-      </div> 
-    </section> 
-  )
+      </div>
+    </section>
+  );
 }
 
 export default ArticlePage;

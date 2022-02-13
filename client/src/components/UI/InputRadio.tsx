@@ -1,24 +1,27 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { IRadioProps } from './interfaces';
 import './ui.scss';
 
-const InputRadio = (props: IRadioProps) => {
+function InputRadio({
+  label, options, name, changeHandler, value,
+}: IRadioProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    props.changeHandler(e);
-  }
+    changeHandler(e);
+  };
 
   return (
-    <div className='form-radio'>
-      <label>{props.label}</label>
-      <div className='options'>
-        {props.options.map((option) => (
+    <div className="form-radio">
+      <label>{label}</label>
+      <div className="options">
+        {options.map((option) => (
           <div key={option.name}>
-            <input 
+            <input
               type="radio"
               id={option.value}
-              name={props.name}
+              name={name}
               value={option.value}
-              checked={option.value === props.value}
+              checked={option.value === value}
               onChange={handleChange}
             />
             <label htmlFor={option.value}>{option.name}</label>
@@ -26,7 +29,7 @@ const InputRadio = (props: IRadioProps) => {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default InputRadio;

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import localStorageService from './localStorage.service';
+import { getRefreshToken } from './localStorage.service';
 import config from '../config.json';
 
 const httpAuth = axios.create({
-  baseURL: config.apiEndPoint + 'auth/'
+  baseURL: `${config.apiEndPoint}auth/`,
 });
 
 const authService = {
@@ -16,7 +16,7 @@ const authService = {
     const { data } = await httpAuth.post('signIn', {
       email,
       password,
-      returnSecureToken: true
+      returnSecureToken: true,
     });
     return data;
   },
@@ -24,10 +24,10 @@ const authService = {
   refresh: async () => {
     const { data } = await httpAuth.post('token', {
       grant_type: 'refresh_token',
-      refreshToken: localStorageService.getRefreshToken()
+      refreshToken: getRefreshToken(),
     });
     return data;
-  }
-}
+  },
+};
 
 export default authService;

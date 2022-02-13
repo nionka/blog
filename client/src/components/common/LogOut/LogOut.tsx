@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../../store/users';
 
-function LogOut(): JSX.Element {
-	const dispatch = useDispatch();
+function LogOut() {
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(logOut());
-	}, []);
+  useEffect(() => {
+    dispatch(logOut());
+  }, []);
 
-	return (
-		<h1>Logout</h1>
-	)
+  return (
+    <h1>Logout</h1>
+  );
 }
 
-export default LogOut
+export default LogOut;

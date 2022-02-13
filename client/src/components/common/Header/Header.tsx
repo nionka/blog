@@ -6,7 +6,7 @@ import Logo from '../Logo/Logo';
 import NavProfile from '../NavProfile/NavProfile';
 import './header.scss';
 
-function Header(): JSX.Element {
+function Header() {
   const isLoggedIn = useSelector(getLoggedIn());
 
   return (
@@ -16,15 +16,15 @@ function Header(): JSX.Element {
         {isLoggedIn ? (
           <NavProfile />
         ) : (
-            <div className="control">
-              <Link to='/authorization' className="link">Вход</Link>
-              <span> / </span>
-              <Link to='/registration' className="link">Регистрация</Link>
-            </div>
-        )} 
+          <div className="control">
+            <Link to="/authorization" className="link">Вход</Link>
+            <span> / </span>
+            <Link to="/registration" className="link">Регистрация</Link>
+          </div>
+        )}
       </div>
     </header>
-  )
+  );
 }
 
 export default Header;

@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '../Logo/Logo';
 import './footer.scss';
 
-function Footer(): JSX.Element {
+function Footer() {
   return (
     <footer className="footer">
       <div className="container">
@@ -10,7 +10,7 @@ function Footer(): JSX.Element {
       </div>
       <div className="footer__copy">© 2021 Wide World</div>
     </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

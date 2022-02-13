@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import articlesService from '../services/article.service';
 import history from '../utils/history';
@@ -9,7 +10,7 @@ const articlesSlice = createSlice({
     article: null,
     isLoadingArticle: true,
     isLoading: true,
-    error: null
+    error: null,
   },
   reducers: {
     articlesListRequested: (state) => {
@@ -39,9 +40,9 @@ const articlesSlice = createSlice({
     articleReceved: (state, action) => {
       state.article = action.payload;
       state.isLoadingArticle = false;
-    }
+    },
 
-  }
+  },
 });
 
 const { reducer: articlesReducer, actions } = articlesSlice;
@@ -53,7 +54,7 @@ const {
   articleDeleted,
   articleReceved,
   articleFiled,
-  articleRequested
+  articleRequested,
 } = actions;
 
 export const loadArticlesList = () => async (dispatch) => {
@@ -82,7 +83,6 @@ export const loadArticle = (articleId) => async (dispatch) => {
   try {
     const data = await articlesService.getArticle(articleId);
     dispatch(articleReceved(data));
-    
   } catch (error) {
     dispatch(articleFiled(error.message));
   }
@@ -98,7 +98,7 @@ export const updateArticle = (articleId, payload) => async (dispatch) => {
   } catch (error) {
     dispatch(articleFiled(error.message));
   }
-}
+};
 
 export const deleteArticle = (articleId) => async (dispatch) => {
   try {
@@ -113,11 +113,9 @@ export const deleteArticle = (articleId) => async (dispatch) => {
 
 export const getArticles = () => (state) => state.articles.entities;
 export const getArticlesListLoader = () => (state) => state.articles.isLoading;
-export const getArticlesByUser = (userId) => (state) => {
-  return state.articles.entities
-    ? state.articles.entities.filter((art) => art.userId === userId)
-    : []
-};
+export const getArticlesByUser = (userId) => (state) => (state.articles.entities
+  ? state.articles.entities.filter((art) => art.userId === userId)
+  : []);
 export const getArticle = () => (state) => state.articles.article;
 export const getArticleLoader = () => (state) => state.articles.isLoadingArticle;
 

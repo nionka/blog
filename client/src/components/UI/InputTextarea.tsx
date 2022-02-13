@@ -1,29 +1,32 @@
-import { ITextarea } from "./interfaces";
+import React from 'react';
+import { ITextarea } from './interfaces';
 
-const InputTextarea = (props: ITextarea) => {
+function InputTextarea({
+  customCssClass, name, placeholder, value, error, changeHandler,
+}: ITextarea) {
   const handleChange = (e: any) => {
-    props.changeHandler(e);
-  }
+    changeHandler(e);
+  };
 
   const stylesAll = [
     'form-textarea',
-    props?.customCssClass ? props.customCssClass : '',
+    customCssClass || '',
   ].join(' ');
 
   return (
     <>
       <textarea
         className={stylesAll}
-        name={props.name}
-        placeholder={props.placeholder}
-        value={props.value}
+        name={name}
+        placeholder={placeholder}
+        value={value}
         onChange={(e) => handleChange(e)}
       />
-      {props.error && (
-        <p style={{color: 'red', paddingLeft: '10px', marginTop: '10px'}}>{props.error}</p>
+      {error && (
+        <p style={{ color: 'red', paddingLeft: '10px', marginTop: '10px' }}>{error}</p>
       )}
     </>
-  )
+  );
 }
 
 export default InputTextarea;

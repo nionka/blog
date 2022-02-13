@@ -1,20 +1,22 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 import './allBlogs.scss';
-import BlogCard from '../BlogCard/BlogCard';
-import history from '../../../utils/history';
 import { useSelector } from 'react-redux';
+import BlogCard from '../ArticleCard/ArticleCard';
+import history from '../../../utils/history';
 import { getArticles } from '../../../store/articles';
-import { IArticle } from '../../../interfaces/interfaces';
+import { IArticle } from '../../../types/interfaces/IArticle';
 import useSearch from '../../hooks/useSearch';
 import Button from '../../UI/Button';
 import { ButtonColor, ButtonSize } from '../../UI/constants';
 
-function AllArticles(): JSX.Element {
+function AllArticles() {
   const articlesOnPage = 2;
-  const [articlesShown, setArticlesShown] = useState(articlesOnPage);
+  const [articlesShown, setArticlesShown] = useState<number>(articlesOnPage);
 
   const search = useSearch(history.location.search);
-  
+
   const articles = useSelector(getArticles());
 
   let articlesFiltered: Array<IArticle>;
@@ -25,25 +27,22 @@ function AllArticles(): JSX.Element {
     articlesFiltered = articles;
   }
 
-  const handleAddArticle = (e: any) => {
-    setArticlesShown(prev => prev + articlesOnPage);
-  }
+  const handleAddArticle = (): void => {
+    setArticlesShown((prev) => prev + articlesOnPage);
+  };
 
-  const checkShowButton = () => {
-    return articlesFiltered.length !== articlesShown && articlesFiltered.length > articlesShown && articlesFiltered.length !== 0;
-  }
+  const checkShowButton = (): boolean => articlesFiltered.length !== articlesShown && articlesFiltered.length > articlesShown && articlesFiltered.length !== 0;
 
   return (
     <section className="allArticles">
-      
+
       {articlesFiltered.length !== 0 ? (
         articlesFiltered.slice(0, articlesShown).map((art: IArticle) => <BlogCard key={art._id} {...art} />)
-        ) : (
-          <div className='card'>Здесь пока нет статей</div>
-        )
-      }
+      ) : (
+        <div className="card">Здесь пока нет статей</div>
+      )}
       {checkShowButton() && (
-        <div className='allArticles__control'>
+        <div className="allArticles__control">
           <Button
             color={ButtonColor.SECONDARY}
             size={ButtonSize.SMALL}
@@ -51,11 +50,11 @@ function AllArticles(): JSX.Element {
           >
             Показать еще
           </Button>
-        </div>  
+        </div>
       )}
-      
+
     </section>
-  )
+  );
 }
 
 export default AllArticles;

@@ -1,32 +1,33 @@
 import React from 'react';
 import { IInputProp } from './interfaces';
 
-function InputText(props: IInputProp) {
+function InputText({
+  customCssClass, placeholder, error, name, value, type, changeHandler,
+}: IInputProp) {
   const allCssClass = [
     'input',
-    props?.customCssClass ? props.customCssClass : '',
+    customCssClass || '',
   ].join(' ');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-    props.changeHandler(e);  
-  }
+    changeHandler(e);
+  };
 
   return (
     <>
       <input
         className={allCssClass}
         onChange={(e) => handleChange(e)}
-        placeholder={props.placeholder}
-        name={props.name}
-        value={props.value}
-        type={props.type} 
+        placeholder={placeholder}
+        name={name}
+        value={value}
+        type={type}
       />
-      {props.error && (
-        <p style={{color: 'red', paddingLeft: '10px', marginTop: '-12px'}}>{props.error}</p>
+      {error && (
+        <p style={{ color: 'red', paddingLeft: '10px', marginTop: '-12px' }}>{error}</p>
       )}
     </>
-  )
+  );
 }
 
 export default InputText;

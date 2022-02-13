@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { getTags } from '../../../store/tags';
 import './tags.scss';
 
-function Tags(): JSX.Element {
+function Tags() {
   const tags = useSelector(getTags());
   return (
     <section className="tags">
       <h2 className="tags__title">Категории</h2>
       <div className="tags__item">
-        <Link to='/'>Все статьи</Link>
+        <Link to="/">Все статьи</Link>
       </div>
       <ul className="tags__list">
         {tags.map((tag: any) => (
@@ -22,7 +22,7 @@ function Tags(): JSX.Element {
         ))}
       </ul>
     </section>
-  )
+  );
 }
 
 export default Tags;

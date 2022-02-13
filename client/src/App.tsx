@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { ToastContainer } from "react-toastify";
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './app.scss';
 import MainPage from './components/pages/MainPage/MainPage';
@@ -17,27 +17,25 @@ import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
   return (
-    <>
-      <AppLoader>
-        <Header />
-        <main className="main">
-          <Switch>
-            <Route path='/authorization' component={Authorization} />
-            <Route path='/registration' component={Registration} />
-            <Route path='/logout' component={LogOut} />
-            <PrivateRoute path='/articles/add' component={ArticleForm} />
-            <PrivateRoute path='/articles/:id/edit' component={ArticleForm} />
-            <Route path='/articles/:id' component={ArticlePage}/>
-            <Route path='/articles' component={MainPage} />
-            <Route path='/users/:id' component={UserPage} />
-            <Route path='/' exact component={MainPage} />
-            <Redirect to='/' />
-          </Switch>
-          <ToastContainer />
-        </main>
-        <Footer />
-      </AppLoader>
-    </>
+    <AppLoader>
+      <Header />
+      <main className="main">
+        <Switch>
+          <Route path="/authorization" component={Authorization} />
+          <Route path="/registration" component={Registration} />
+          <Route path="/logout" component={LogOut} />
+          <PrivateRoute path="/articles/add" component={ArticleForm} />
+          <PrivateRoute path="/articles/:id/edit" component={ArticleForm} />
+          <Route path="/articles/:id" component={ArticlePage} />
+          <Route path="/articles" component={MainPage} />
+          <Route path="/users/:id" component={UserPage} />
+          <Route path="/" exact component={MainPage} />
+          <Redirect to="/" />
+        </Switch>
+        <ToastContainer />
+      </main>
+      <Footer />
+    </AppLoader>
   );
 }
 

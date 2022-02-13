@@ -1,34 +1,34 @@
+import React from 'react';
 import { IInputSelect } from './interfaces';
 import './ui.scss';
 
-const InputSelect = (props: IInputSelect) => {
-
-  const handleChange = (e: any) => {
-    props.changeHandler(e);
-  }
+function InputSelect({
+  name, defaultValue, options, changeHandler, label,
+}: IInputSelect) {
+  const handleChange = (e: React.ChangeEvent) => {
+    changeHandler(e);
+  };
 
   return (
-    <>
-      <select
-        className='form-select'
-        name={props.name}
-        onChange={(e) => handleChange(e)}
-        value={props.defaultValue}
-      >
-        <option value="">
-          {props.label}    
+    <select
+      className="form-select"
+      name={name}
+      onChange={(e) => handleChange(e)}
+      value={defaultValue}
+    >
+      <option value="">
+        {label}
+      </option>
+      {options.map((opt) => (
+        <option
+          key={opt._id}
+          value={opt._id}
+        >
+          {opt.name}
         </option>
-        {props.options.map((opt) => (
-            <option
-              key={opt._id}
-              value={opt._id}
-            >
-              {opt.name}
-            </option>
-          ))}
-      </select>
-    </>
-  )
+      ))}
+    </select>
+  );
 }
 
 export default InputSelect;
