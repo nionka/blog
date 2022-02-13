@@ -14,13 +14,13 @@ const NavProfile = () => {
 
   const toggleMenu = () => {
     setOpen(!isOpen);
-  }
+  };
 
   const checkClick = (e: any) => {
     if (!e.target.closest('.profile')) {
       setOpen(false);
     }
-  }
+  };
 
   if (isOpen) {
     body?.addEventListener('click', checkClick);

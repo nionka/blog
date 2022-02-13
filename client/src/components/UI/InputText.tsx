@@ -20,7 +20,7 @@ function InputText(props: IInputProp) {
         placeholder={props.placeholder}
         name={props.name}
         value={props.value}
-        type="text" 
+        type={props.type} 
       />
       {props.error && (
         <p style={{color: 'red', paddingLeft: '10px', marginTop: '-12px'}}>{props.error}</p>

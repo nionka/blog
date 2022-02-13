@@ -37,7 +37,7 @@ function Registration(): JSX.Element {
       return;
     }
     setData((prev) => ({ ...prev, [name]: value }));  
-  }
+  };
 
   const handleSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault();
@@ -46,7 +46,7 @@ function Registration(): JSX.Element {
     if (!isValid) return;
 
     dispatch(signUp(data));
-  }
+  };
 
   const validatorConfig = {
     email: {
@@ -62,13 +62,13 @@ function Registration(): JSX.Element {
         message: 'Укажите пароль'
       },
       isCapitalSymbol: {
-        message: "Пароль должен содержать хотя бы одну заглавную букву"
+        message: 'Пароль должен содержать хотя бы одну заглавную букву'
       },
       isContainDigit: {
-          message: "Пароль должен содержать хотя бы одно число"
+          message: 'Пароль должен содержать хотя бы одно число'
       },
       min: {
-          message: "Пароль должен состаять миниму из 8 символов",
+          message: 'Пароль должен состаять миниму из 8 символов',
           value: 8
       }
     },
@@ -79,23 +79,23 @@ function Registration(): JSX.Element {
     },
     licence: {
       isRequired: {
-        message: "Вы не можете использовать наш сервис без подтреврждения лицензионного соглашения"
+        message: 'Необходимо подтвердить лицензионное соглашение'
       }
     }
-  }
+  };
 
   const validate = () => {
     const error: any = validator(data, validatorConfig);
     setErrors(error);
     return Object.keys(error).length === 0;
-  }
+  };
 
   if (authErrors) {
     const customId = 'authErrors';
     toast.error(authErrors,{
       toastId: customId
     });
-  }
+  };
 
   return (
     <section className="registration" >
@@ -111,7 +111,7 @@ function Registration(): JSX.Element {
         />
         <InputText
           customCssClass='mb'
-          type='text'
+          type='password'
           placeholder="Пароль"
           name='password'
           value={data.password}
@@ -156,7 +156,7 @@ function Registration(): JSX.Element {
         </Button>
       </form>
     </section>
-  )
-}
+  );
+};
 
 export default Registration;

@@ -1,13 +1,13 @@
 import React from 'react';
 import './mainPage.scss';
 import Tags from '../../common/Tags/Tags';
-import AllBlogs from '../../common/AllBlogs/AllBlogs';
+import AllArticles from '../../common/AllBlogs/AllArticles';
 
 function MainPage(): JSX.Element {
   return (
     <section className="mainPage">
       <div className="container">
-        <AllBlogs />
+        <AllArticles />
         <Tags />
       </div>
     </section> 

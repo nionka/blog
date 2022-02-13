@@ -11,6 +11,7 @@ import { ButtonColor, ButtonSize } from '../../UI/constants';
 import InputSelect from '../../UI/InputSelect';
 import InputText from '../../UI/InputText';
 import InputTextarea from '../../UI/InputTextarea';
+import Loader from '../Loader/Loader';
 import './articleForm.scss';
 
 const ArticleForm = ({ match }: any) => {
@@ -47,6 +48,9 @@ const ArticleForm = ({ match }: any) => {
     image: {
       isRequired: {
         message: 'Добавьте картинку для поста'
+      },
+      isImage: {
+        message: 'Ссылка должна вести на картинку'
       }
     },
     description: {
@@ -86,13 +90,11 @@ const ArticleForm = ({ match }: any) => {
   useEffect(() => {
     setData(initialState)
   }, [articleLoader])
-
-  if (!currentUserId) history.push('/');
-
+  
   if (id && article?.userId !== currentUserId) history.push('/');
 
   if (id && articleLoader) {
-    return <p>Loader...</p>
+    return <Loader />
   }
 
   const handleChange = (e: any) => {

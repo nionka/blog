@@ -83,7 +83,7 @@ function Authorization(): JSX.Element {
         />
         <InputText
           customCssClass='mb'
-          type='text'
+          type='password'
           placeholder="Пароль"
           name='password'
           value={data.password}

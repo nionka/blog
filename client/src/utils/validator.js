@@ -32,6 +32,11 @@ export function validator(data, config) {
 					statusValidate = data.length < config.value;
 					break;
 			}
+			case 'isImage': {
+				const imageRegExp = /^https?:\/\/\S+$/gi;
+				statusValidate = !imageRegExp.test(data);
+				break;
+			}
 			default:
 					break;
 		}

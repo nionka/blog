@@ -57,7 +57,7 @@ function BlogCard(props: IBlogCardProp): JSX.Element {
         {checkControl() && (
           <div className='card__control'>
             <Button
-              color={ButtonColor.PRIMARY}
+              color={ButtonColor.SECONDARY}
               size={ButtonSize.SMALL}
               clickHandler={handleEdit}
             >
@@ -65,7 +65,7 @@ function BlogCard(props: IBlogCardProp): JSX.Element {
             </Button>
             <Button
               customCssClass='ml'
-              color={ButtonColor.PRIMARY}
+              color={ButtonColor.SECONDARY}
               size={ButtonSize.SMALL}
               clickHandler={handleDelete}
             >

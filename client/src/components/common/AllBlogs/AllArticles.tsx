@@ -9,7 +9,7 @@ import useSearch from '../../hooks/useSearch';
 import Button from '../../UI/Button';
 import { ButtonColor, ButtonSize } from '../../UI/constants';
 
-function AllBlogs(): JSX.Element {
+function AllArticles(): JSX.Element {
   const articlesOnPage = 2;
   const [articlesShown, setArticlesShown] = useState(articlesOnPage);
 
@@ -34,7 +34,7 @@ function AllBlogs(): JSX.Element {
   }
 
   return (
-    <section className="allBlogs">
+    <section className="allArticles">
       
       {articlesFiltered.length !== 0 ? (
         articlesFiltered.slice(0, articlesShown).map((art: IArticle) => <BlogCard key={art._id} {...art} />)
@@ -43,17 +43,19 @@ function AllBlogs(): JSX.Element {
         )
       }
       {checkShowButton() && (
-        <Button
-          color={ButtonColor.PRIMARY}
-          size={ButtonSize.SMALL}
-          clickHandler={handleAddArticle}
-        >
-          Показать еще
-        </Button>
+        <div className='allArticles__control'>
+          <Button
+            color={ButtonColor.SECONDARY}
+            size={ButtonSize.SMALL}
+            clickHandler={handleAddArticle}
+          >
+            Показать еще
+          </Button>
+        </div>  
       )}
       
     </section>
   )
 }
 
-export default AllBlogs;
+export default AllArticles;
