@@ -144,5 +144,6 @@ export const getCurrentUserById = () => function (state) {
 export const getUsers = () => (state) => state.users.entities;
 export const getUserById = (userId) => (state) => state.users.entities.find((user) => user._id === userId);
 export const getLoadingUsers = () => (state) => state.users.isLoadingUsers;
+export const getUsersError = () => (state) => state.users.error;
 
 export default usersReducer;

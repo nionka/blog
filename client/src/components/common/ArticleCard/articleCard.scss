@@ -66,5 +66,16 @@
 
   &__control {
     margin-left: auto;
+    margin-top: 15px;
+  }
+
+  @media (max-width: $mobile) {
+    flex-direction: column;
+    padding: 20px 10px;
+
+    &__img {
+      width: 100%;
+      margin-bottom: 10px;
+    }
   }
 }

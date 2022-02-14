@@ -9,6 +9,7 @@ import dateTransform from '../../../utils/dateTransform';
 import history from '../../../utils/history';
 import Button from '../../UI/Button';
 import { ButtonColor, ButtonSize } from '../../UI/constants';
+import errorPic from '../../../img/errorPic.jpg';
 import './articleCard.scss';
 
 function ArticleCard({
@@ -27,12 +28,17 @@ function ArticleCard({
     history.push(`/articles/${_id}/edit`);
   };
 
+  const showErrorImage = (e: React.SyntheticEvent) => {
+    const target = e.target as HTMLImageElement;
+    target.src = errorPic;
+  };
+
   const checkControl = (): boolean => currentUserId === userId && history.location.pathname !== '/';
 
   return (
     <article className="card">
       <div className="card__img">
-        <img src={image} alt={title} />
+        <img src={image} alt={title} onError={showErrorImage} />
       </div>
       <div className="card__body">
         <div className="card__content">
@@ -49,6 +55,7 @@ function ArticleCard({
         {checkControl() && (
           <div className="card__control">
             <Button
+              customCssClass="fs-13"
               color={ButtonColor.SECONDARY}
               size={ButtonSize.SMALL}
               clickHandler={handleEdit}
@@ -56,7 +63,7 @@ function ArticleCard({
               Редактировать
             </Button>
             <Button
-              customCssClass="ml"
+              customCssClass="ml fs-13"
               color={ButtonColor.SECONDARY}
               size={ButtonSize.SMALL}
               clickHandler={handleDelete}

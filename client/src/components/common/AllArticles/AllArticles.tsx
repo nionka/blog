@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable max-len */
 import React, { useState } from 'react';
-import './allBlogs.scss';
+import './allArticles.scss';
 import { useSelector } from 'react-redux';
 import BlogCard from '../ArticleCard/ArticleCard';
 import history from '../../../utils/history';

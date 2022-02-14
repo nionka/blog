@@ -96,7 +96,7 @@ function ArticleForm({ match }: RouteComponentProps<TParams>) {
     setData(initialState);
   }, [articleLoader]);
 
-  if (id && article?.userId !== currentUserId) history.push('/');
+  if (id && article && article?.userId !== currentUserId) history.push('/');
 
   if (id && articleLoader) {
     return <Loader />;

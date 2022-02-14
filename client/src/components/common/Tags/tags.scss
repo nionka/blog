@@ -1,7 +1,6 @@
 @import '../../../styles/variables.scss';
 
 .tags {
-
   width: 25%;
   max-width: 200px;
   flex: 0 1 auto;
@@ -15,7 +14,6 @@
   &__list {
     display: flex;
     flex-wrap: wrap;
-
   }
 
   &__item {
@@ -31,7 +29,19 @@
       background-color: $accentColorSecondary;
       color: $mainColorLight;
     }
+  }
 
+  @media (max-width: $mobile) {
+    order: 1;
+    width: 100%;
+    max-width: none;
+
+    &__title {
+      font-size: 26px;
+    }
+    &__item {
+      padding: 6px;
+    }
   }
 
 }

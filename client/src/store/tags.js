@@ -41,6 +41,7 @@ export const loadTagsList = () => async (dispatch) => {
 
 export const getTags = () => (state) => state.tags.entities;
 export const getTagsLoader = () => (state) => state.tags.isLoading;
+export const getTagsError = () => (state) => state.tags.error;
 export const getTagById = (tagId) => function (state) {
   if (state.tags.entities) {
     return state.tags.entities.find((tag) => tag._id === tagId);

@@ -6,6 +6,8 @@ import { getTagById } from '../../../store/tags';
 import { getUserById } from '../../../store/users';
 import { TParams } from '../../../types/TParams';
 import dateTransform from '../../../utils/dateTransform';
+import Loader from '../../common/Loader/Loader';
+import errorPic from '../../../img/errorPic.jpg';
 import './article.scss';
 
 function ArticlePage({ match }: RouteComponentProps<TParams>) {
@@ -21,8 +23,12 @@ function ArticlePage({ match }: RouteComponentProps<TParams>) {
   }, []);
 
   if (articleLoader) {
-    return <div>Loader</div>;
+    return <Loader />;
   }
+  const showErrorImage = (e: React.SyntheticEvent) => {
+    const target = e.target as HTMLImageElement;
+    target.src = errorPic;
+  };
 
   return (
     <section className="blog">
@@ -38,7 +44,7 @@ function ArticlePage({ match }: RouteComponentProps<TParams>) {
         </div>
 
         <div className="blog__img">
-          <img src={article.image} alt={article.title} />
+          <img src={article.image} alt={article.title} onError={showErrorImage} />
         </div>
         <div className="blog__content">
           {article.content}

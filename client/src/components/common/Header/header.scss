@@ -23,4 +23,10 @@
       color: $accentColor;
     }
   }
+
+  @media (max-width: $mobile) {
+    .control {
+      text-align: end;
+    }
+  }
 }

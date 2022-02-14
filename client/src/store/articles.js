@@ -113,6 +113,7 @@ export const deleteArticle = (articleId) => async (dispatch) => {
 
 export const getArticles = () => (state) => state.articles.entities;
 export const getArticlesListLoader = () => (state) => state.articles.isLoading;
+export const getArticlesListError = () => (state) => state.articles.error;
 export const getArticlesByUser = (userId) => (state) => (state.articles.entities
   ? state.articles.entities.filter((art) => art.userId === userId)
   : []);
